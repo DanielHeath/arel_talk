@@ -1,0 +1,3 @@
+[submodule "presentation/presenteer"]
+	path = presentation/presenteer
+	url = git@github.com:willemmulder/Presenteer.js.git

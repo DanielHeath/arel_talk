@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+<div class="slide">
+        <h2> {{ page.title }} </h2>
+	{{ content }}
+</div>
+
+<nav>
+	{% if page.previous.url %}
+        <a 
+        	href="{{page.previous.url}}" 
+                class="previous"
+        	title="Previous">
+        	←
+        </a>
+	{% endif %} 
+	{% if page.next.url %}
+        <a 
+        	href="{{page.next.url}}" 
+                class="next"
+        	title="Next">
+        	→
+        </a>
+	{% endif %}
+</nav>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Presenteer.js</title>
+	<style>
+		body, html { font: 14px arial, verdana; margin: 0px; padding: 0px; color: #222233; background: #cc1919; background: #fbfbfb; }
+		h1, h2, h3, h4 { color: #cc1919; }
+		a { text-decoration: none; border: none; }
+		* { 
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		
+		.inline { display: inline; margin: 0px; }
+		
+		.header { width: 800px; margin: 20px auto; padding: 20px; }
+		.header a { display: block-inline; padding: 10px; }
+	
+		.container { width: 800px; margin: 20px auto; background: #fff; padding: 20px; box-shadow: 0px 0px 5px #777; }
+		
+		.source { width: 100%; display: inline-block; background: #fafafa; padding: 10px; }
+	
+		.presentationcontainer { 
+			overflow: hidden; 
+			background: #ddddff; 
+			cursor: pointer; 
+			-webkit-box-shadow: inset 0px 0px 5px rgba(100,100,100,0.2);
+			box-shadow: inset 0px 0px 5px rgba(100,100,100,0.2); 
+		}
+		.presentation > div { float: left; clear: both; padding: 20px; }
+		
+		#presentationcontainer1 { height: 100px; }
+		
+		#presentationcontainer2 { height: 100px; width: 80%; float: left; }
+		#presentationcontainer2_counter { height: 100px; width: 20%; float: right; background: #bbbbdd; }
+		
+		#presentationcontainer3 { height: 100px; }
+		#presentation3 { width: 400%; }
+		#presentation3 > div { width: 25%; float: left; clear: none; }
+		#presentationcontainer3_counter { height: 40px; }
+		#presentation3_counter > div { clear: none; }
+		
+		.clearfix { visibility: hidden; font-size: 1px; clear:both; }
+		
+		.syntaxhighlighter.js { overflow-y: hidden !important; }
+		
+		/* specify smooth animations between states */
+		.presentation { 
+		    -moz-transition: all 0.7s ease; 
+		    -webkit-transition: all 0.7s ease; 
+		    -o-transition: all 0.7s ease; 
+		    -ms-transition: all 0.7s ease;
+		    transition: all 0.7s ease; 
+			-webkit-perspective: hidden; /* suppress flicker */
+			-webkit-transform: translateZ(0); /* make animation GPU accelerated by applying -webkit-transform: translateZ(0); */
+	    }
+	</style>
+	<script src="js/jquery-1.8.1.min.js"></script>
+	<script src="js/sylvester/sylvester.min.js"></script>
+	<script src="js/presenteer.js"></script>
+	
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.js"></script>
+	<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.css"/>
+	<script type="text/javascript">
+		SyntaxHighlighter.defaults.toolbar = false;
+		SyntaxHighlighter.all();
+	</script>
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-258109-13']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+</head>
+<body>
+	<div class="header">Projects 
+		<a href='http://willemmulder.github.com/Presenteer.js/'>Presenteer.js</a> 
+		<a href='http://willemmulder.github.com/BetterExamples.js/'>BetterExamples.js</a> 
+		<a href='http://willemmulder.github.com/FilteredPaste.js/'>FilteredPaste.js</a> 
+	</div>
+	<div class="container">
+		<h1>Presenteer.js</h1>
+		<p class='source'>
+			Source code at <a class="button" href="https://github.com/willemmulder/Presenteer.js">https://github.com/willemmulder/Presenteer.js</a>
+		</p>
+		<script>
+			$(window).load(function() {
+				var presentation1 = new Presenteer("#presentation1", $("#presentation1 > div"), { 
+					centerHorizontally : false
+				});
+				$("#presentationcontainer1").on("click", function() { presentation1.next(); });
+				presentation1.start();
+			});
+		</script>
+		<div class="presentationcontainer" id="presentationcontainer1">
+			<div class="presentation" id="presentation1">
+				<div>Welcome to <code class="inline">Presenteer.js</code>. Click in this box to continue.</div>
+				<div>Presenteer.js a flexible HTML5 presentation tool. <br />Yet, it needs very little configuration</div>
+				<div>In fact, it can be used with one simple line of code</div>
+				<div>For example the code for this slideshow is <br /><pre class="brush: js;">var presentation = new Presenteer("#presentation1", $("#presentation1 > div"), { centerHorizontally: false });</pre></div>
+				<div>We can navigate by calling <code class="inline">presentation.next();</code> or <code class="inline">presentation.prev();</code></div>
+				<div style="-webkit-transform: rotate(8deg); -moz-transform: rotate(8deg); -o-transform: rotate(8deg); -ms-transform: rotate(8deg); transform: rotate(8deg);">The nice thing is that Presenteer follows element-transforms like on this element!</div>
+				<div>There's also several constructor-options and custom callback functions.<br />Read on for more!</div>
+			</div>
+		</div>
+		<p class='source'>
+			<a href="examples/fullscreen/index.html" target="_blank">Visit a screen-filling demo presentation</a>! <small>(best in Chrome or Firefox)</small>
+		</p>
+		<div>
+			<h2>Introduction</h2>
+				<p>Presenteer.js a very flexible HTML5 presentation tool that works in one line of code, but is configurable with constructor options and many callbacks.</p>
+				<p>
+					In its simplest form, it works like <pre class="brush:js">var presentation = new Presenteer("#presentation", $("#presentation > div"));</pre>
+				</p>
+				<p>
+					And then navigate through the presentation with <code class="inline">presentation.start();</code>, <code class="inline">presentation.next();</code>, <code class="inline">presentation.prev();</code> and <code class="inline">presentation.show(0-based-index);</code>
+				</p>
+			<h2>Installation</h2>
+				<p>Include jQuery and Presenteer.js (and possibly Sylvester.js, see below) in your page.</p>
+				<pre class="brush: js;">
+					&ltscript src="js/jquery-1.8.1.min.js"></script>
+					&ltscript src="js/presenteer-1.0.min.js"></script></pre>
+				<p>Create the HTML and style it with CSS</p>
+				<pre class="brush:js">
+				<div class="presentationcontainer" id="presentationcontainer1">
+					<div class="presentationcanvas" id="presentation1">
+						<div>First slide.</div>
+						<div>Second slide.</div>
+						<div>Third slide.</div>
+						<div>Fourth slide.</div>
+					</div>
+				</div></pre>
+				<p>Then, on page load, create a Presenteer instances for every presentation on the page. For this example, we only have one presentation, so the below code suffices.</p>
+				<pre class="brush: js;">var presentation = new Presenteer(
+	"#presentation1", 
+	$("#presentation1 > div"), 
+	{ followElementTransforms: false }
+);</pre>
+				<p>I set followElementTransforms to false to make Presenteer not follow element transforms. Only in that case, we don't need the Sylvester matrix library. If you <strong>do</strong> want Presenteer.js to follow element transforms (e.g. element rotations), also add the Sylvester library to your page</p>
+				<pre class="brush:js">
+					&ltscript src="js/sylvester/sylvester.min.js"></script></pre>
+				<p>And set <code>followElementTransforms: true</code>. This is also the default</p>
+				<pre class="brush: js;">var presentation = new Presenteer(
+	"#presentation1", 
+	$("#presentation1 > div"), 
+	{ followElementTransforms: true }
+);</pre>
+			<h2>Constructor options</h2>
+				<p>Apart from the <code>followElementTransforms</code> constructor argument, there's many more options and callbacks. A general Presenteer instantiation looks like this:</p>
+				<p><pre class="brush: js;">var presentation = new Presenteer(canvas, elements, options);</pre></p>
+				<p>Where <code class="inline">canvas</code> is a selector or jQuery element of the canvas on which the presentation is placed. It is this canvas that will be repositioned with CSS3 transform to slide a certain element into view.</p>
+				<p>It is good practice to wrap the presentation in a containing div with <code>overflow: hidden</code>. This container will act as the viewport for the presentation.</p>
+				<p>The list of elements on the canvas is specified in the <code class="inline">elements</code> argument. It is a list of objects that are any of the following</p>
+				<ol>
+					<li>CSS selector, like "#elm"</li>
+					<li>jQuery element, like $("#elm")</li>
+					<li>A Presenteer Object, that looks like 
+						<pre class="brush: js;">{
+	element : e, // CSS selector or jQuery object,
+
+	// Direction-independent callbacks
+	onBeforeEnter : function(), // Callback right before e is shown 
+	onAfterEnter : function(), // Callback right after e is shown 
+	onAfterLeave : function(), // Callback right before presentation moves from e to another element
+	onBeforeLeave : function(), // Callback right after presentation moves from e to another element
+
+	// Forward-navigating callbacks
+	onBeforeLeaveToNext : function(), // Callback right before presentation moves from e to the next element
+	onAfterLeaveToNext : function(), //	Callback right after presentation moves from e to the next element					
+	onBeforeEnterFromPrev : function(), // Callback right before presentation moves from the previous element to e
+	onAfterEnterFromPrev : function(), // Callback right after presentation moves from the previous element to e
+
+	// Backward-navigating callbacks
+	onBeforeLeaveToPrev : function(), // Callback right before presentation moves from e to the previous element
+	onAfterLeaveToPrev : function(), // Callback right after presentation moves from e to the previous element 
+	onBeforeEnterFromNext : function(), // Callback right before presentation moves from the next element to e
+	onAfterEnterFromNext : function(), // Callback right after presentation moves from the next element to e
+}</pre>
+					</li>
+				</ol>
+				<p>And <code  class="inline">options</code> is an object with the following defaults</p>
+				<pre class="brush: js;">{
+	showOriginalMargins : false, // When showing an element, also show its margins
+	centerHorizontally : true, // When showing an element, center it horizontally
+	centerVertically : true, // When showing an element, center it vertically
+	followElementTransforms: true, // Follow element transforms like rotation. If true, requires the Sylvester matrix libraries.
+	transition: { // Use this as a transition for the presentation
+		"transition-delay" : "0s",
+		"transition-duration" : "0.5s",
+		"transition-property" : "all",
+		"transition-timing-function" : "ease"
+	},
+	useExistingTransitionIfAvailable: true, // Use the transitions as defined in the CSS. Will not work for Opera and IE
+	onBeforeEnter : function(elm) {}, // Global callback right before presentation moves to element elm
+	onAfterEnter : function(elm) {}, // Global callback right after presentation moves to element elm
+	onBeforeLeave : function(elm) {}, // Global callback right before presentation moves from element elm to another element
+	onAfterLeave : function(elm) {} // Global callback right after presentation moves from element elm to another element
+}</pre>
+			<h2>Navigation</h2>
+			<p>Once we have created a presentation with <pre class="brush: js;">var presentation = new Presenteer("#presentation", $("#presentation > div"));</pre> we can call the following commands to navigate through the presentation</p>
+			<p>
+				Go to the first element by doing <code class="inline">presentation.start();</code>
+			</p>
+			<p>
+				To go forward, call <code class="inline">presentation.next();</code>. If the end of the presentation is reached, the first element will be shown again.
+			</p>
+			<p>
+				To go back, call <code class="inline">presentation.prev();</code> or <code class="inline">presentation.previous();</code>. If the start of the presentation is reached, the last element will be shown again.
+			</p>
+			<p>
+				To go to an arbitrary element, call <code class="inline">presentation.show(index);</code> where index is 0-based.
+			</p>
+			<p>
+			<h2>Examples</h2>
+			<h3>1. Two coupled presentations</h3>
+			<script>
+				$(window).load(function() {
+					var presentation2_counter = new Presenteer(
+						"#presentation2_counter", 
+						$("#presentation2_counter > div")
+					);
+				
+					var presentation2 = new Presenteer(
+						"#presentation2", 
+						$("#presentation2 > div"), 
+						{ onAfterEnter : function(elm) { setTimeout(function(){presentation2_counter.prev()},1); } }
+					);
+					
+					$("#presentationcontainer2_counter").on("click", function() { presentation2.next(); });
+					$("#presentationcontainer2").on("click", function() { presentation2.next(); });
+					presentation2_counter.start();
+					presentation2.start();
+					$("#presentation2fullscreen").on("click", function() { presentation2.fullScreen($("#coupledpresentations")); });
+				});
+			</script>
+			<div id="coupledpresentations">
+				<div class="presentationcontainer" id="presentationcontainer2">
+					<div class="presentation" id="presentation2">
+						<div>Woo, that's a nice slide-counter at the right side! Click!</div>
+						<div style="-webkit-transform: translate(0px, 50px) rotate(90.01deg); -moz-transform: translate(0px, 50px) rotate(90.01deg); -o-transform: translate(0px, 50px) rotate(90.01deg);  -ms-transform: translate(0px, 50px) rotate(90.01deg); transform: translate(0px, 50px) rotate(90.01deg);">90 degree ROTATION</div>
+						<div style="-webkit-transform: translate(0,100px); -moz-transform: translate(0,100px); -o-transform: translate(0,100px); -ms-transform: translate(0,100px); transform: translate(0,100px);">And back! That's it for this demo. Click to restart.</div>
+					</div>
+				</div>
+				<div class="presentationcontainer" id="presentationcontainer2_counter">
+					<div class="presentation" id="presentation2_counter">
+						<div>3</div>
+						<div>2</div>
+						<div>1</div>
+					</div>
+				</div>
+				<div class="clearfix">.</div>
+			</div>
+			<p>
+				<button id="presentation2fullscreen">Go fullscreen</button>
+			</p>
+			<p>HTML</p>
+			<pre class="brush: js;">
+			<div class="presentationcontainer" id="presentationcontainer2">
+				<div class="presentation" id="presentation2">
+					<div>Woo, that's a nice slide-counter at the right side! Click!</div>
+					<div style="-webkit-transform: translate(0px, 50px) rotate(90.01deg); -moz-transform: translate(0px, 50px) rotate(90.01deg); -o-transform: translate(0px, 50px) rotate(90.01deg);  -ms-transform: translate(0px, 50px) rotate(90.01deg); transform: translate(0px, 50px) rotate(90.01deg);">90 degree ROTATION</div>
+					<div style="-webkit-transform: translate(0,100px); -moz-transform: translate(0,100px); -o-transform: translate(0,100px); -ms-transform: translate(0,100px); transform: translate(0,100px);">And back! That's it for this demo. Click to restart.</div>
+				</div>
+			</div>
+			<div class="presentationcontainer" id="presentationcontainer2_counter">
+				<div class="presentation" id="presentation2_counter">
+					<div>3</div>
+					<div>2</div>
+					<div>1</div>
+				</div>
+			</div>
+			<p>
+				<button id="presentation2fullscreen">Go fullscreen</button>
+			</p></pre>
+			<p>Code</p>
+			<pre class="brush: js;">
+			var presentation2_counter = new Presenteer(
+					"#presentation2_counter", 
+					$("#presentation2_counter > div")
+				);
+			
+				var presentation2 = new Presenteer(
+					"#presentation2", 
+					$("#presentation2 > div"), 
+					{ onAfterEnter : function(elm) { setTimeout(function(){presentation2_counter.prev()},1); } }
+				);
+				
+				$("#presentationcontainer2_counter").on("click", function() { presentation2.next(); });
+				$("#presentationcontainer2").on("click", function() { presentation2.next(); });
+				presentation2_counter.start();
+				presentation2.start();
+				$("#presentation2fullscreen").on("click", function() { presentation2.fullScreen($("#coupledpresentations")); });</pre>
+			<h3>2. Presentation with slide-indicator</h3>
+			<script>
+				$(window).load(function() {
+					// Create the HTML for the indicator
+					$("#presentation3 > div").each(function(index,elm) {
+						$("#presentation3_counter").append("<div>" + (index+1) + "</div>");
+					});
+					var presentation3_counter = new Presenteer(
+						"#presentation3_counter", 
+						$("#presentation3_counter > div"),
+						{ centerHorizontally: false }
+					);
+				
+					var presentation3 = new Presenteer(
+						"#presentation3", 
+						$("#presentation3 > div"), 
+						{ onAfterEnter : function(elm) { setTimeout(function(){presentation3_counter.show(presentation3.getCurrentIndex())},1); } }
+					);
+					
+					$("#presentationcontainer3_counter").on("click", function() { presentation3.next(); });
+					$("#presentationcontainer3").on("click", function() { presentation3.next(); });
+					presentation3_counter.start();
+					presentation3_counter.prev();
+					presentation3.start();
+				});
+			</script>
+			<div class="presentationcontainer" id="presentationcontainer3">
+				<div class="presentation" id="presentation3">
+					<div>First slide.</div>
+					<div>Second slide.</div>
+					<div>Third slide.</div>
+					<div>Fourth slide.</div>
+				</div>
+			</div>
+			<div class="presentationcontainer" id="presentationcontainer3_counter">
+				<div class="presentation" id="presentation3_counter">
+				</div>
+			</div>
+			<div class="clearfix">.</div>
+			<p>HTML</p>
+			<pre class="brush: js;">
+			<div class="presentationcontainer" id="presentationcontainer3">
+				<div class="presentation" id="presentation3">
+					<div>First slide.</div>
+					<div>Second slide.</div>
+					<div>Third slide.</div>
+					<div>Fourth slide.</div>
+				</div>
+			</div>
+			<div class="presentationcontainer" id="presentationcontainer3_counter">
+				<div class="presentation" id="presentation3_counter">
+				</div>
+			</div></pre>
+			<p>Code</p>
+			<pre class="brush: js;">
+			$(window).load(function() {
+					// Create the HTML for the indicator
+					$("#presentation3 > div").each(function(index,elm) {
+						$("#presentation3_counter").append("<div>" + (index+1) + "</div>");
+					});
+					var presentation3_counter = new Presenteer(
+						"#presentation3_counter", 
+						$("#presentation3_counter > div"),
+						{ centerHorizontally: false }
+					);
+				
+					var presentation3 = new Presenteer(
+						"#presentation3", 
+						$("#presentation3 > div"), 
+						{ onAfterEnter : function(elm) { setTimeout(function(){presentation3_counter.show(presentation3.getCurrentIndex())},1); } }
+					);
+					
+					$("#presentationcontainer3_counter").on("click", function() { presentation3.next(); });
+					$("#presentationcontainer3").on("click", function() { presentation3.next(); });
+					presentation3_counter.start();
+					presentation3_counter.prev();
+					presentation3.start();
+				});</pre>
+		</div>
+	</div>
+</body>
+</html>

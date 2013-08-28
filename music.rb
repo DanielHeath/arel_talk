@@ -3,7 +3,8 @@
 # One of the really great things about Ruby is that there is 
 # lots of code written by the community and provided for free.
 
-# One example of this is ActiveRecord, which makes it easy to use databases in your programs.
+# One example of this is ActiveRecord, which makes 
+# it easy to use databases in your programs.
 require 'active_record'
 
 # In this example we are creating a database to keep track of our music collection.
@@ -58,6 +59,7 @@ end
 class Track < ActiveRecord::Base
     belongs_to :album
     default_scope  { order 'album_id asc, track_number asc' }
+    scope :opener, -> { where(track_number: 1)}
     def to_s
         "#{album.title} - #{track_number} - #{title}"
     end

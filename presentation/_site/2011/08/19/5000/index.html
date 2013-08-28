@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>ActiveRecord</title>
+        <link rel="stylesheet" href="/style.css" />
+	    <link href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono" rel="stylesheet" type="text/css" />
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="//feed.xml" />
+        <script type="text/javascript" src="/presenteer/js/jquery-1.8.1.min.js"></script>
+		<script type="text/javascript" src="/present.js"></script>
+
+		<link rel="stylesheet" href="/highlight.js/styles/default.css">
+		<script src="/highlight.js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+
+	</head>
+
+	<body>
+
+		<div class="slide">
+        <h2> Describe relationships </h2>
+	<pre><code class="ruby">
+    # ActiveRecord knows about plurals.
+    # The 'Band' class will 
+    # look for a table called 'bands'.
+    class Band &lt; ActiveRecord::Base
+        has_many :albums
+    end
+
+    # Again, the plurals are understood.
+    # This will connect to the 
+    # "albums" table automatically.
+    class Album &lt; ActiveRecord::Base
+        belongs_to :band
+    end
+
+    # Traversal is provided when you specify relationships
+    Band.first.albums.first.band
+</code></pre>
+
+</div>
+
+<nav>
+	
+        <a 
+        	href="/2011/08/19/4000/" 
+                class="previous"
+        	title="Previous">
+        	←
+        </a>
+	 
+	
+        <a 
+        	href="/2011/08/19/6000/" 
+                class="next"
+        	title="Next">
+        	→
+        </a>
+	
+</nav>
+
+
+		<footer class="row-fluid page-footer">
+			<address>
+			  &copy; 2013 <strong class="name">Daniel Heath</strong> |
+			  <a class="email" href="mailto:daniel@heath.cc">daniel@heath.cc</a> |
+			  <a href="http://daniel.heath.cc/">daniel.heath.cc</a> |
+			  <a href="https://github.com/DanielHeath">github.com/DanielHeath</a> |
+			  <a href="https://twitter.com/DanielrHeath">@DanielRheath</a>
+			</address>
+		</footer>
+
+	</body>
+
+</html>
+

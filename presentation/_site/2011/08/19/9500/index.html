@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>ActiveRecord</title>
+        <link rel="stylesheet" href="/style.css" />
+	    <link href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono" rel="stylesheet" type="text/css" />
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="//feed.xml" />
+        <script type="text/javascript" src="/presenteer/js/jquery-1.8.1.min.js"></script>
+		<script type="text/javascript" src="/present.js"></script>
+
+		<link rel="stylesheet" href="/highlight.js/styles/default.css">
+		<script src="/highlight.js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+
+	</head>
+
+	<body>
+
+		<div class="slide">
+        <h2> Chain queries with calculations </h2>
+	<pre><code class="ruby">
+    class Album < ActiveRecord::Base
+        has_many :tracks
+        scope :with_at_least, -> { |min| 
+            join(:tracks).having('count tracks.id > ?', min)
+        }
+    end
+
+    Album.with_at_least(5).order('name')
+</code></pre>
+
+<pre><code class="sql">
+    select albums.* from albums
+    join tracks on albums.id = tracks.album_id
+    having count(tracks.id) > 5
+    order by albums.name desc
+</code></pre>
+
+</div>
+
+<nav>
+	
+        <a 
+        	href="/2011/08/19/9000/" 
+                class="previous"
+        	title="Previous">
+        	←
+        </a>
+	 
+	
+        <a 
+        	href="/2011/08/19/9700/" 
+                class="next"
+        	title="Next">
+        	→
+        </a>
+	
+</nav>
+
+
+		<footer class="row-fluid page-footer">
+			<address>
+			  &copy; 2013 <strong class="name">Daniel Heath</strong> |
+			  <a class="email" href="mailto:daniel@heath.cc">daniel@heath.cc</a> |
+			  <a href="http://daniel.heath.cc/">daniel.heath.cc</a> |
+			  <a href="https://github.com/DanielHeath">github.com/DanielHeath</a> |
+			  <a href="https://twitter.com/DanielrHeath">@DanielRheath</a>
+			</address>
+		</footer>
+
+	</body>
+
+</html>
+

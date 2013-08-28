@@ -1,0 +1,10 @@
+---
+title: ActiveRecord
+layout: default
+---
+<script type="text/javascript">
+	{% for post in site.posts  %}
+	target = '{{ post.url }}'
+	{% endfor %}
+	window.location.pathname = target
+</script>
