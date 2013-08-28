@@ -1,4 +1,3 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'activerecord'
-gem 'sqlite3'
+gem 'jekyll', :git => 'git@github.com:mojombo/jekyll.git'
